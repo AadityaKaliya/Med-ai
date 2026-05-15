@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+/>
+
+<title>Doctor Sign In - MedAI</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet"
+/>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+ body{
+    background-image: url("a1.PNG");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+      display:flex;
+      justify-content:center;
+      padding:20px;
+    }
+
+.container{
+  width:420px;
+  background:white;
+  padding:40px;
+  border-radius:28px;
+  box-shadow:
+  0 10px 40px rgba(0,0,0,0.2);
+}
+
+.logo{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.logo img{
+  width:80px;
+  height:80px;
+  border-radius:20px;
+}
+
+.logo h1{
+  margin-top:15px;
+  color:#081b4b;
+}
+
+.input-box{
+  margin-bottom:20px;
+}
+
+.input-box label{
+  display:block;
+  margin-bottom:8px;
+  font-weight:600;
+  color:#333;
+}
+
+.input-box input{
+  width:100%;
+  padding:14px;
+  border:1px solid #ddd;
+  border-radius:14px;
+  outline:none;
+  font-size:15px;
+}
+
+.input-box input:focus{
+  border-color:#5d5fef;
+}
+
+button{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:14px;
+  background:
+  linear-gradient(
+    135deg,
+    #5d5fef,
+    #7b61ff
+  );
+  color:white;
+  font-size:17px;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+button:hover{
+  opacity:0.9;
+}
+
+.bottom{
+  margin-top:20px;
+  text-align:center;
+  color:#666;
+}
+
+.bottom a{
+  color:#5d5fef;
+  text-decoration:none;
+  font-weight:600;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="logo">
+
+    <!-- YOUR LOGO -->
+
+    <img src="a2.1.png">
+
+    <h1>Doctor Sign In</h1>
+
+  </div>
+
+  <div class="input-box">
+
+    <label>
+      Doctor Name
+    </label>
+
+    <input
+      type="text"
+      id="doctorName"
+      placeholder="Enter doctor name"
+    >
+
+  </div>
+
+  <div class="input-box">
+
+    <label>
+      Email
+    </label>
+
+    <input
+      type="email"
+      id="doctorEmail"
+      placeholder="Enter email"
+    >
+
+  </div>
+
+  <div class="input-box">
+
+    <label>
+      Password
+    </label>
+
+    <input
+      type="password"
+      id="doctorPassword"
+      placeholder="Enter password"
+    >
+
+  </div>
+
+  <div class="input-box">
+
+    <label>
+      Specialization
+    </label>
+
+    <input
+      type="text"
+      id="doctorSpecialization"
+      placeholder="Cardiologist / Dentist"
+    >
+
+  </div>
+
+  <button onclick="doctorSignup()">
+    Create Doctor Account
+  </button>
+
+  <div class="bottom">
+
+    Already have account?
+    <a href="#">
+      Login
+    </a>
+
+  </div>
+
+</div>
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword
+}
+from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+import {
+  getDatabase,
+  ref,
+  set
+}
+from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+
+  apiKey: "YOUR_API_KEY",
+
+  authDomain:
+  "YOUR_PROJECT.firebaseapp.com",
+
+  databaseURL:
+  "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+
+  projectId: "YOUR_PROJECT",
+
+  storageBucket:
+  "YOUR_PROJECT.appspot.com",
+
+  messagingSenderId:
+  "XXXXXXXX",
+
+  appId: "XXXXXXXX"
+
+};
+
+/* INIT */
+
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
+
+const db =
+getDatabase(app);
+
+/* SIGNUP */
+
+window.doctorSignup =
+async function(){
+
+  const name =
+  document.getElementById(
+    "doctorName"
+  ).value;
+
+  const email =
+  document.getElementById(
+    "doctorEmail"
+  ).value;
+
+  const password =
+  document.getElementById(
+    "doctorPassword"
+  ).value;
+
+  const specialization =
+  document.getElementById(
+    "doctorSpecialization"
+  ).value;
+
+  if(
+    !name ||
+    !email ||
+    !password ||
+    !specialization
+  ){
+
+    alert(
+      "Please fill all fields"
+    );
+
+    return;
+
+  }
+
+  try {
+
+    const userCredential =
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    const user =
+    userCredential.user;
+
+    /* SAVE TO DIFFERENT DATABASE SECTION */
+
+    await set(
+      ref(
+        db,
+        "doctors/" + user.uid
+      ),
+      {
+
+        doctorName: name,
+
+        doctorEmail: email,
+
+        specialization:
+        specialization,
+
+        role: "doctor",
+
+        createdAt:
+        new Date().toISOString()
+
+      }
+    );
+
+    alert(
+      "Doctor account created successfully"
+    );
+
+    /* REDIRECT */
+
+    window.location.href =
+    "doctor-dashboard.html";
+
+  }
+
+  catch(error){
+
+    console.log(error);
+
+    alert(error.message);
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>

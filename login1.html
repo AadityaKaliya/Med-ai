@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Med AI - Patient Login</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#f4f9ff;
+      overflow-x:hidden;
+    }
+
+    .navbar{
+      width:100%;
+      height:90px;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 70px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo img{
+      width:70px;
+    }
+
+    .logo-text h2{
+      color:#0c4bb0;
+      font-size:34px;
+    }
+
+    .logo-text span{
+      color:#18c7a3;
+    }
+
+    .logo-text p{
+      font-size:12px;
+      color:#555;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:40px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:#14315f;
+      font-weight:500;
+    }
+
+    .hero{
+      width:100%;
+      min-height:calc(100vh - 90px);
+      display:flex;
+      padding:60px 70px;
+      gap:40px;
+    }
+
+    .left{
+      flex:1;
+    }
+
+    .left h1{
+      font-size:70px;
+      line-height:80px;
+      color:#083b8a;
+      margin-top:40px;
+    }
+
+    .left h1 span{
+      color:#1dc6a5;
+    }
+
+    .line{
+      width:300px;
+      height:4px;
+      background:linear-gradient(to right,#0d6efd,#1dc6a5);
+      border-radius:20px;
+      margin:30px 0;
+    }
+
+    .left p{
+      font-size:24px;
+      color:#334;
+      line-height:42px;
+    }
+
+    .doctor-image{
+      width:500px;
+      margin-top:40px;
+    }
+
+    .right{
+      width:620px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .login-card{
+      width:100%;
+      background:#fff;
+      border-radius:35px;
+      padding:50px;
+      box-shadow:0 15px 40px rgba(0,0,0,0.08);
+    }
+
+    .login-top{
+      text-align:center;
+    }
+
+    .login-top img{
+      width:120px;
+      margin-bottom:20px;
+    }
+
+    .login-top h2{
+      font-size:52px;
+      color:#083b8a;
+    }
+
+    .login-top p{
+      color:#555;
+      font-size:20px;
+      margin:20px 0 40px;
+    }
+
+    .input-group{
+      margin-bottom:30px;
+    }
+
+    .input-group label{
+      display:block;
+      margin-bottom:12px;
+      font-weight:600;
+      color:#083b8a;
+    }
+
+    .input-box{
+      width:100%;
+      height:70px;
+      border:2px solid #d8e3f4;
+      border-radius:18px;
+      padding:0 20px;
+      font-size:18px;
+      outline:none;
+    }
+
+    .login-btn{
+      width:100%;
+      height:70px;
+      border:none;
+      border-radius:18px;
+      background:linear-gradient(to right,#0d6efd,#14c7a4);
+      color:#fff;
+      font-size:24px;
+      font-weight:600;
+      cursor:pointer;
+    }
+
+    .otp-btn{
+      width:100%;
+      height:70px;
+      border:2px solid #0d6efd;
+      background:#fff;
+      border-radius:18px;
+      color:#0d6efd;
+      font-size:24px;
+      font-weight:600;
+      cursor:pointer;
+      margin-top:20px;
+    }
+
+    .register{
+      text-align:center;
+      margin-top:35px;
+      font-size:18px;
+    }
+
+    .register a{
+      color:#0d6efd;
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    @media(max-width:1200px){
+
+      .hero{
+        flex-direction:column;
+      }
+
+      .right{
+        width:100%;
+      }
+
+      .left h1{
+        font-size:50px;
+        line-height:60px;
+      }
+
+      .navbar{
+        padding:20px;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .doctor-image{
+        width:100%;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav class="navbar">
+
+    <div class="logo">
+
+      <img src="a2.1.png" alt="Logo">
+
+      <div class="logo-text">
+
+        <h2>med <span>ai</span></h2>
+
+        <p>- a perfect solution for care -</p>
+
+      </div>
+
+    </div>
+
+    <div class="nav-links">
+
+      <a href="home.html">Home</a>
+
+      <a href="#">About Us</a>
+
+      <a href="#">Services</a>
+
+      <a href="#">Find a Doctor</a>
+
+      <a href="#">Health Records</a>
+
+      <a href="#">Contact Us</a>
+
+    </div>
+
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <!-- LEFT SIDE -->
+
+    <div class="left">
+
+      <h1>
+
+        Your Health,<br>
+
+        <span>Our Priority</span>
+
+      </h1>
+
+      <div class="line"></div>
+
+      <p>
+
+        Welcome to Med AI – your trusted partner in better health and care.
+
+      </p>
+
+      <img
+        src="a3.png"
+        class="doctor-image"
+        alt="Doctor"
+      >
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="right">
+
+      <div class="login-card">
+
+        <div class="login-top">
+
+          <img src="a2.1.png" alt="Logo">
+
+          <h2>Welcome Back!</h2>
+
+          <p>
+  Login with Email or Mobile Number
+</p>
+
+        </div>
+
+        <!-- LOGIN FORM -->
+
+       <form id="login">
+
+  <!-- EMAIL -->
+
+  <div class="input-group">
+
+    <label>Email Address</label>
+
+    <input
+      type="email"
+      id="email"
+      class="input-box"
+      placeholder="Enter email"
+    >
+
+  </div>
+
+
+  <!-- PASSWORD -->
+
+  <div class="input-group">
+
+    <label>Password</label>
+
+    <input
+      type="password"
+      id="password"
+      class="input-box"
+      placeholder="Enter password"
+    >
+
+  </div>
+
+
+  <!-- EMAIL LOGIN BUTTON -->
+
+  <button
+    type="button"
+    class="login-btn"
+    onclick="loginUser()"
+  >
+    Login With Email
+  </button>
+
+
+  <!-- OR -->
+
+  <div
+    style="
+      text-align:center;
+      margin:25px 0;
+      font-size:20px;
+      font-weight:600;
+      color:#666;
+    "
+  >
+    OR
+  </div>
+
+
+  <!-- MOBILE -->
+
+  <div class="input-group">
+
+    <label>Mobile Number</label>
+
+    <input
+      type="number"
+      id="mobileno"
+      class="input-box"
+      placeholder="Enter mobile number"
+    >
+
+  </div>
+
+
+  <!-- SEND OTP -->
+
+  <button
+    type="submit"
+    class="otp-btn"
+  >
+    Send OTP
+  </button>
+
+
+  <!-- RECAPTCHA -->
+
+  <div
+    id="recaptcha-container"
+    style="margin-top:25px;"
+  ></div>
+
+
+  <!-- OTP SECTION -->
+
+  <div
+    id="otpSection"
+    style="display:none; margin-top:30px;"
+  >
+
+    <div class="input-group">
+
+      <label>Enter OTP</label>
+
+      <input
+        type="number"
+        id="otp"
+        class="input-box"
+        placeholder="Enter 6 digit OTP"
+      >
+
+    </div>
+
+    <button
+      type="button"
+      class="otp-btn"
+      onclick="verifyOTP()"
+    >
+      Verify OTP
+    </button>
+
+  </div>
+
+
+  <!-- REGISTER -->
+
+  <div class="register">
+
+    Don’t have an account?
+
+    <a href="signin.html">
+      Register Now
+    </a>
+
+  </div>
+
+</form>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FIREBASE JS -->
+
+  <script
+    type="module"
+    src="login1.js"
+  ></script>
+
+</body>
+
+</html>
